@@ -39,6 +39,7 @@ export default function Fireflies({ count }) {
   useFrame((state, delta) => {
     firefliesMaterialRef.current.uTime += delta;
   });
+
   return (
     <points>
       <bufferGeometry>

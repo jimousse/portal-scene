@@ -14,6 +14,10 @@ import portalVertexShader from './shaders/portal/vertex.glsl';
 import portalFragmentShader from './shaders/portal/fragment.glsl';
 import Fireflies from './Fireflies';
 
+const PORTAL_COLOR_START = '#fff';
+const PORTAL_COLOR_END = '#f98282';
+const FIREFLIES_COUNT = 1000;
+
 const PortalMaterial = shaderMaterial(
   {
     uTime: 0,
@@ -27,18 +31,20 @@ const PortalMaterial = shaderMaterial(
 extend({ PortalMaterial });
 
 export default function Experience() {
+  const showDebugUI = window.location.hash === '#debug';
+
   const { nodes } = useGLTF('./model/portal.glb');
   const bakedTexture = useTexture('./model/baked.jpg');
   const portalMaterialRef = useRef();
   const { firefliesCount, portalColorStart, portalColorEnd } = useControls({
     firefliesCount: {
-      value: 1000,
+      value: FIREFLIES_COUNT,
       min: 0,
-      max: 2000,
+      max: FIREFLIES_COUNT * 2,
       step: 10,
     },
-    portalColorStart: '#fff',
-    portalColorEnd: '#f98282',
+    portalColorStart: PORTAL_COLOR_START,
+    portalColorEnd: PORTAL_COLOR_END,
   });
 
   useFrame((state, delta) => {
@@ -47,7 +53,7 @@ export default function Experience() {
 
   return (
     <>
-      <Perf position={'top-left'} />
+      {showDebugUI && <Perf position={'top-left'} />}
       <color args={['#030202']} attach="background" />
       <OrbitControls makeDefault />
 

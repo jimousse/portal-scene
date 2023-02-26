@@ -37,16 +37,16 @@ export default function Experience() {
   const { nodes } = useGLTF('./model/portal.glb');
   const bakedTexture = useTexture('./model/baked.jpg');
   const portalMaterialRef = useRef();
-  const { firefliesCount, portalColorStart, portalColorEnd } = useControls({
-    firefliesCount: {
-      value: FIREFLIES_COUNT,
-      min: 0,
-      max: FIREFLIES_COUNT * 2,
-      step: 10,
-    },
-    portalColorStart: PORTAL_COLOR_START,
-    portalColorEnd: PORTAL_COLOR_END,
-  });
+  // const { firefliesCount, portalColorStart, portalColorEnd } = useControls({
+  //   firefliesCount: {
+  //     value: FIREFLIES_COUNT,
+  //     min: 0,
+  //     max: FIREFLIES_COUNT * 2,
+  //     step: 10,
+  //   },
+  //   portalColorStart: PORTAL_COLOR_START,
+  //   portalColorEnd: PORTAL_COLOR_END,
+  // });
 
   useFrame((state, delta) => {
     portalMaterialRef.current.uTime += delta;
@@ -93,14 +93,14 @@ export default function Experience() {
           rotation={nodes.portalLight.rotation}
         >
           <portalMaterial
-            uColorStart={portalColorStart}
-            uColorEnd={portalColorEnd}
+            uColorStart={PORTAL_COLOR_START}
+            uColorEnd={PORTAL_COLOR_END}
             ref={portalMaterialRef}
             side={THREE.DoubleSide}
           />
         </mesh>
 
-        <Fireflies count={firefliesCount} />
+        <Fireflies count={FIREFLIES_COUNT} />
         <UnderFloor />
       </Center>
     </>

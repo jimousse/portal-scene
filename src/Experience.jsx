@@ -13,6 +13,7 @@ import { extend, useFrame } from '@react-three/fiber';
 import portalVertexShader from './shaders/portal/vertex.glsl';
 import portalFragmentShader from './shaders/portal/fragment.glsl';
 import Fireflies from './Fireflies';
+import UnderFloor from './UnderFloor';
 
 const PORTAL_COLOR_START = '#fff';
 const PORTAL_COLOR_END = '#f98282';
@@ -100,6 +101,7 @@ export default function Experience() {
         </mesh>
 
         <Fireflies count={firefliesCount} />
+        <UnderFloor />
       </Center>
     </>
   );
